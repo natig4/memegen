@@ -136,6 +136,16 @@ main {
     width: 30%;
 }
 
+.search-panel .search-input input {
+    font-size: 1.3em;
+    font-family: Fuzzy;
+    text-decoration: none;
+    padding: 5.6px 5.3px 5.1px 5.3px;
+    border-radius: 6px;
+    background-color: #fff;
+    border: none;
+}
+
 .search-panel :not(:first-child) {
     width: 70%;
 }
@@ -226,12 +236,10 @@ footer {
 
 .canvas-container {
     width: 50%;
-    height: 100%;
 }
 
 canvas {
     width: 100%;
-    height: 100%;
     outline: 5px dashed black;
 }
 
@@ -243,12 +251,11 @@ canvas {
     align-items: center;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    grid-template-areas: "control-box control-box control-box control-box control-box"/* / */
-    /* / */
-    ". switch-box add-box remove-box . "/* / */
+    grid-template-areas: "str-line str-line str-line str-line str-line"/* / */
+    " . switch-line add-line remove-line .  "/* / */
     ". . . . . "/* / */
     "increase-font decrease-font align-left align-center align-right"/* / */
-    "font-family font-family font-family stroke-color font-color" "download download share save save";
+    "font-family font-family font-family stroke-color font-color" "download download share save save"
 }
 
 .meme-controller>* {
@@ -267,28 +274,28 @@ canvas {
     border: none;
 }
 
-.control-box {
-    grid-area: control-box;
+.str-line {
+    grid-area: str-line;
     margin: auto;
     width: 90%;
     height: 80%;
 }
 
-.control-box input {
+.str-line input {
     height: 100%;
     font-size: 3em;
 }
 
-.switch-box {
-    grid-area: switch-box;
+.switch-line {
+    grid-area: switch-line;
 }
 
-.add-box {
-    grid-area: add-box;
+.add-line {
+    grid-area: add-line;
 }
 
-.remove-box {
-    grid-area: remove-box;
+.remove-line {
+    grid-area: remove-line;
 }
 
 .increase-font {
@@ -337,6 +344,11 @@ canvas {
     width: 6em;
     font-size: 1.3em;
     font-family: Fuzzy;
+    text-decoration: none;
+    padding: 5.6px 5.3px 5.1px 5.3px;
+    border-radius: 6px;
+    background-color: #fff;
+    border: none;
 }
 
 .save {

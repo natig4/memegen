@@ -23,9 +23,6 @@ function updateSelectedMeme(imgId, pos) {
     }
 }
 
-
-
-
 function setLineTxt(txt) {
     const line = getCurrentLine();
     line.txt = txt;
@@ -33,15 +30,15 @@ function setLineTxt(txt) {
 
 
 
-function createLine(pos) {
+function createLine(pos, font) {
     var line = {
         pos: { x: 20, y: 20 },
         txt: ' ',
         size: 40,
-        fontFamily: 'Impact',
+        fontFamily: 'impact',
         align: 'left',
         color: 'white',
-        strokeColor: 'black',
+        strokeColor: 'white',
         isDrag: false
     }
     if (!gIsFirstLine) {
@@ -76,7 +73,7 @@ function getLinesAmount() {
 
 function changeColor(type, color) {
     if (type === 'font') gMeme.lines[gMeme.selectedLineIdx].color = color;
-    else gMeme.lines[gMeme.selectedLineIdx].stroke = color;
+    else gMeme.lines[gMeme.selectedLineIdx].strokeColor = color;
 }
 
 function changeFontSize(diff) {
@@ -84,7 +81,7 @@ function changeFontSize(diff) {
 }
 
 function changeFontFamily(font) {
-    getCurrentLine().font = font;
+    getCurrentLine().fontFamily = font;
 }
 
 function moveLine(diff, dir) {
@@ -119,11 +116,11 @@ function changeAlign(alignDir) {
 
 function addLine(font) {
     if (gMeme.lines.length === 1) {
-        createLine({ x: 20, y: gElCanvas.height - 50 })
+        createLine({ x: 20, y: gElCanvas.height - 50 }, font)
     } else if (gMeme.lines.length === 2) {
-        createLine({ x: 20, y: gElCanvas.height / 2 })
+        createLine({ x: 20, y: gElCanvas.height / 2 }, font)
     } else {
-        createLine({ x: 20, y: 30 + gNextLineHeight })
+        createLine({ x: 20, y: 30 + gNextLineHeight }, font)
         gNextLineHeight += 20;
     }
     _updateLineIdx(gMeme.lines.length - 1);
