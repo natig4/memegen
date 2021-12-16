@@ -3,9 +3,10 @@
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
-    lines: [{}]
+    lines: []
 }
-var nextLineHeight = 20;
+var gNextLineHeight = 20;
+var gIsFirstLine = false;
 
 
 function getImgId() {
@@ -16,15 +17,9 @@ function updateSelectedMeme(imgId, pos) {
     gMeme = {
         selectedImgId: imgId,
         selectedLineIdx: 0,
-        lines: [{
-            pos: pos,
-            txt: '',
-            size: 40,
-            font: 'Impact',
-            align: 'left',
-            color: 'white',
-            strokeColor: 'black'
-        }]
+        lines: [
+            createLine(pos)
+        ]
     }
 }
 
@@ -39,19 +34,21 @@ function setLineTxt(txt) {
 
 
 function createLine(pos) {
-    if (gMeme.lines.length === 0) {
-        var line = {
-            pos: { x: 20, y: 20 },
-            txt: ' ',
-            size: 40,
-            fontFamily: 'Impact',
-            align: 'left',
-            color: 'white',
-            strokeColor: 'black',
-            isDrag: false
-        }
-    } else {
-        var line = {
+    var line = {
+        pos: { x: 20, y: 20 },
+        txt: ' ',
+        size: 40,
+        fontFamily: 'Impact',
+        align: 'left',
+        color: 'white',
+        strokeColor: 'black',
+        isDrag: false
+    }
+    if (!gIsFirstLine) {
+        gIsFirstLine = true;
+        return line
+    } else if (gMeme.lines.length !== 0) {
+        line = {
             pos: pos,
             txt: 'Enter Text here',
             size: gMeme.lines[gMeme.selectedLineIdx].size,
@@ -100,17 +97,13 @@ function changeLine() {
     if (!lines.length) return;
     if (gMeme.selectedLineIdx + 1 === lines.length) gMeme.selectedLineIdx = 0;
     else gMeme.selectedLineIdx++;
-
-    // gMeme.selectedLineIdx = gMeme.selectedLineIdx;
     _updateLineIdx(gMeme.selectedLineIdx);
     return lines[gMeme.selectedLineIdx];
 }
 
 function changeAlign(alignDir) {
     const line = getCurrentLine();
-
     line.align = alignDir;
-
     switch (alignDir) {
         case 'left':
             line.pos.x = 0;
@@ -130,8 +123,8 @@ function addLine(font) {
     } else if (gMeme.lines.length === 2) {
         createLine({ x: 20, y: gElCanvas.height / 2 })
     } else {
-        createLine({ x: 20, y: 30 + nextLineHeight })
-        nextLineHeight += 20;
+        createLine({ x: 20, y: 30 + gNextLineHeight })
+        gNextLineHeight += 20;
     }
     _updateLineIdx(gMeme.lines.length - 1);
 }
