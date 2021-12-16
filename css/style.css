@@ -1,0 +1,392 @@
+@font-face {
+    font-family: Teko;
+    src: url(../fonts/Teko/Teko-Light.ttf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Fuzzy;
+    src: url(../fonts/FuzzyBubbles/FuzzyBubbles-Regular.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    font-family: Teko;
+    color: white;
+}
+
+body {
+    text-align: center;
+    background-color: #2196f396;
+    color: white;
+}
+
+a {
+    color: inherit;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+li,
+img,
+button,
+input {
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+}
+
+.fa {
+    width: 2.5em;
+    height: 2.5em;
+    text-align: center;
+    text-decoration: none;
+    background-color: #e5e5e5;
+    color: white;
+    line-height: 2.5em;
+    font-size: 2em;
+}
+
+.main-layout {
+    width: 80%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.layout {
+    flex-direction: column;
+}
+
+main {
+    min-height: 800px;
+}
+
+header {
+    background-color: #ff7f00;
+    border-bottom: 5px solid #1e1e1e;
+}
+
+.header-container {
+    justify-content: space-between;
+}
+
+.logo {
+    font-family: Teko;
+    font-size: 4em;
+}
+
+main {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.main-nav {
+    font-family: Teko;
+    justify-content: center;
+    font-size: 2em;
+}
+
+.main-nav ul {
+    align-items: center;
+}
+
+.main-nav li {
+    border-inline-start: 1px solid #1e1e1e;
+    height: 100px;
+    width: 150px;
+    color: white;
+    line-height: 100px;
+}
+
+.main-nav li:last-of-type {
+    border-inline-end: 1px solid #1e1e1e;
+}
+
+.main-nav li.active {
+    color: greenyellow;
+    box-shadow: 0 5px 0;
+}
+
+.main-content {
+    flex-direction: column;
+    gap: 15px;
+}
+
+.search-panel {
+    flex-direction: row;
+    color: black;
+    font-size: 2em;
+    justify-content: space-between;
+    height: 3em;
+}
+
+.search-panel .search-input {
+    background-color: white;
+    width: 30%;
+}
+
+.search-panel :not(:first-child) {
+    width: 70%;
+}
+
+.search-indexes :first-child {
+    padding-inline-start: 10px;
+}
+
+.word1 {
+    font-size: 1.5rem;
+}
+
+.word3 {
+    font-size: 2.5rem;
+}
+
+.word5 {
+    font-size: 1rem;
+}
+
+.gallery-container {
+    background-color: #e5e5e5;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5em;
+    justify-items: center;
+    padding-top: 6.5em;
+    padding-bottom: 6.5em;
+    padding-inline-end: 5em;
+    padding-inline-start: 5em;
+}
+
+.gallery-container .img-container {
+    width: 100%;
+    height: 100%;
+}
+
+footer {
+    background-color: #ff7f00;
+    border-top: 5px solid #1e1e1e;
+    padding-top: 1em;
+    padding-bottom: 4.5em;
+    width: 100%;
+}
+
+.footer-container {
+    flex-direction: column;
+    gap: 2em;
+}
+
+.copy-rights {
+    font-size: 2em;
+}
+
+.social-nav {
+    height: 2.5em;
+    gap: 1.5em;
+    justify-content: space-evenly;
+}
+
+.fa-facebook:hover {
+    background-color: #3b5998;
+}
+
+.fa-instagram:hover {
+    background: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf)
+}
+
+.fa-linkedin:hover {
+    background-color: #0e76a8;
+}
+
+
+/* 
+
+/
+/
+/
+/
+/
+
+/ */
+
+.meme-container {
+    margin: 0 auto;
+    gap: 40px;
+    height: 600px;
+}
+
+.canvas-container {
+    width: 50%;
+    height: 100%;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    outline: 5px dashed black;
+}
+
+.meme-controller {
+    outline: 5px dashed black;
+    gap: 10px;
+    width: 50%;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas: "control-box control-box control-box control-box control-box"/* / */
+    /* / */
+    ". switch-box add-box remove-box . "/* / */
+    ". . . . . "/* / */
+    "increase-font decrease-font align-left align-center align-right"/* / */
+    "font-family font-family font-family stroke-color font-color" "download download share save save";
+}
+
+.meme-controller>* {
+    color: black;
+    background-color: white;
+}
+
+.meme-controller button :empty {
+    height: 3em;
+}
+
+.meme-controller button {
+    padding: 5.6px 5.3px 5.1px 5.3px;
+    border-radius: 6px;
+    background-color: #fff;
+    border: none;
+}
+
+.control-box {
+    grid-area: control-box;
+    margin: auto;
+    width: 90%;
+    height: 80%;
+}
+
+.control-box input {
+    height: 100%;
+    font-size: 3em;
+}
+
+.switch-box {
+    grid-area: switch-box;
+}
+
+.add-box {
+    grid-area: add-box;
+}
+
+.remove-box {
+    grid-area: remove-box;
+}
+
+.increase-font {
+    grid-area: increase-font;
+}
+
+.decrease-font {
+    grid-area: decrease-font;
+}
+
+.align-left {
+    grid-area: align-left;
+}
+
+.align-center {
+    grid-area: align-center;
+}
+
+.align-right {
+    grid-area: align-right;
+}
+
+.font-family {
+    grid-area: font-family;
+    font-family: Fuzzy;
+    width: 70%;
+    font-size: 2em;
+}
+
+.font-family select {
+    font-family: Fuzzy;
+    width: 100%;
+    font-size: 0.7em;
+}
+
+.stroke-color {
+    grid-area: stroke-color;
+}
+
+.font-color {
+    grid-area: font-color;
+}
+
+.download {
+    grid-area: download;
+    width: 6em;
+    font-size: 1.3em;
+    font-family: Fuzzy;
+}
+
+.save {
+    grid-area: save;
+    width: 6em;
+    font-size: 1.3em;
+    font-family: Fuzzy;
+}
+
+.share {
+    grid-area: share;
+    width: 6em;
+    font-size: 1.3em;
+    font-family: Fuzzy;
+}
+
+
+/* HELPERS */
+
+.hide {
+    display: none;
+}
+
+
+/* flex helpers */
+
+.flex {
+    display: flex;
+}
+
+.flex.space-around {
+    justify-content: space-around;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+
+/* list helpers */
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* grid helpers */
+
+.grid {
+    display: grid;
+}
