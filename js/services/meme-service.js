@@ -123,7 +123,7 @@ function addLine(font) {
     if (gMeme.lines.length === 0) {
         createLine({ x: 20, y: 30 }, font)
     } else if (gMeme.lines.length === 1) {
-        createLine({ x: gMeme.lines[gMeme.selectedLineIdx].pos.x, y: gElCanvas.height - 50 }, font)
+        createLine({ x: gMeme.lines[gMeme.selectedLineIdx].pos.x, y: gElCanvas.height - 75 }, font)
     } else if (gMeme.lines.length === 2) {
         createLine({ x: gMeme.lines[gMeme.selectedLineIdx].pos.x, y: gElCanvas.height / 2 }, font)
     } else {

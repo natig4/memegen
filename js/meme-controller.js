@@ -139,7 +139,7 @@ function drawText() {
         gCtx.lineWidth = 2;
         gCtx.textBaseline = 'top';
         gCtx.textAlign = `${line.align}`;
-        gCtx.font = `${line.size}px ${line.fontFamily}`;
+        gCtx.font = `${line.size/10}em ${line.fontFamily}`;
         gCtx.fillStyle = line.color;
         gCtx.strokeStyle = line.stroke;
         gCtx.fillText(txt, line.pos.x, line.pos.y);
@@ -150,13 +150,18 @@ function drawText() {
 function drawBorder() {
     const line = getCurrentLine();
     if (!line) return;
+
     gCtx.beginPath();
     if (line.align === 'left') {
-        gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
+        if (window.screen.width > 1000) gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.5);
+        else gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
+
     } else if (line.align === 'center') {
-        gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
+        if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.5);
+        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
     } else if (line.align === 'right') {
-        gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
+        if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.5);
+        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size)
     }
     gCtx.lineWidth = 2;
     gCtx.strokeStyle = line.strokeColor;
@@ -175,7 +180,7 @@ function renderCanvas(imgId) {
         var x = (gElCanvas.width / 2) - (img.width / 2) * scale;
         var y = (gElCanvas.height / 2) - (img.height / 2) * scale;
         gCtx.drawImage(img, x, y, img.width * scale, img.height * scale)
-            // addListeners()
+        addListeners()
         drawText();
         drawBorder();
         renderTextInput();

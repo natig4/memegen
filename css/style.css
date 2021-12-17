@@ -9,21 +9,16 @@
     src: url(../fonts/FuzzyBubbles/FuzzyBubbles-Regular.ttf);
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    font-family: Teko;
-    color: white;
-}
-
 body {
     text-align: center;
     background-color: #2196f396;
     color: white;
+    font-size: 0.5em;
+    font-family: Teko;
+    color: white;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 a {
@@ -33,7 +28,6 @@ a {
 
 img {
     width: 100%;
-    height: 100%;
 }
 
 li,
@@ -45,7 +39,7 @@ input,
 }
 
 input {
-    width: 100%;
+    background-color: #ffffff;
 }
 
 .fa {
@@ -62,29 +56,18 @@ input {
     flex-direction: column;
 }
 
-.main-layout {
-    max-width: 80vw;
-    margin: 0 auto;
-}
-
 header {
     background-color: #ff7f00;
     border-bottom: 5px solid #1e1e1e;
 }
 
 .header-container {
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .logo {
     font-family: Teko;
     font-size: 4em;
-}
-
-main {
-    padding-top: 3em;
-    padding-bottom: 3em;
-    min-height: 50em;
 }
 
 .main-nav {
@@ -101,7 +84,7 @@ main {
     border-inline-start: 1px solid #1e1e1e;
     width: 4em;
     color: white;
-    line-height: 6.25rem;
+    line-height: 3.25rem;
 }
 
 .main-nav li:last-of-type {
@@ -111,6 +94,13 @@ main {
 .main-nav li.active {
     color: greenyellow;
     box-shadow: 0 5px 0;
+}
+
+main {
+    padding-top: 3em;
+    padding-bottom: 3em;
+    flex-basis: 100%;
+    align-self: center;
 }
 
 .main-content {
@@ -158,6 +148,7 @@ form input {
 
 .search-indexes {
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .search-indexes li {
@@ -173,13 +164,11 @@ form input {
 
 .gallery-container .img-container {
     width: 100%;
-    height: 100%;
 }
 
 .memes-gallery {
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    gap: 40px;
     justify-content: center;
 }
 
@@ -187,15 +176,9 @@ form input {
     font-size: 5em;
 }
 
-.memes-gallery img {
-    width: 15em;
-    height: 15em;
-}
-
 footer {
     background-color: #ff7f00;
     border-top: 5px solid #1e1e1e;
-    padding-top: 1em;
     padding-bottom: 4.5em;
     width: 100%;
 }
@@ -228,13 +211,13 @@ footer {
 }
 
 .meme-container {
-    margin: 0 auto;
     gap: 40px;
-    height: 600px;
+    flex-direction: column;
 }
 
 .canvas-container {
-    width: 25vw;
+    width: 80vw;
+    height: 40vh;
 }
 
 canvas {
@@ -244,15 +227,16 @@ canvas {
 
 .meme-controller {
     outline: 5px dashed black;
-    gap: 10px;
-    width: 25vw;
+    gap: 0.4em;
+    width: 80vw;
+    /*/this/*/
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, 1fr);
     grid-template-areas: "str-line str-line str-line str-line str-line"/* / */
     " . switch-line add-line remove-line .  "/* / */
-    ". stickers-box stickers-box stickers-box . "/* / */
+    "stickers-box stickers-box stickers-box stickers-box stickers-box "/* / */
     "increase-font decrease-font align-left align-center align-right"/* / */
     "font-family font-family font-family stroke-color font-color" "download download share save save"
 }
@@ -262,10 +246,6 @@ canvas {
     background-color: white;
 }
 
-.meme-controller button :empty {
-    height: 3em;
-}
-
 .meme-controller button {
     padding: 5.6px 5.3px 5.1px 5.3px;
     border-radius: 6px;
@@ -273,10 +253,21 @@ canvas {
     border: none;
 }
 
+.meme-controller img {
+    width: 1em;
+}
+
+.sticker img {
+    width: 100%;
+}
+
+button input {
+    width: 1.5em;
+    border: none;
+}
+
 .str-line {
     grid-area: str-line;
-    margin: auto;
-    width: 90%;
 }
 
 .str-line input {
@@ -413,4 +404,39 @@ canvas {
 
 .grid {
     display: grid;
+}
+
+@media (min-width: 1080px) {
+    .main-layout {
+        max-width: 80vw;
+    }
+    body {
+        font-size: 1em;
+    }
+    .main-nav li {
+        line-height: 6.25rem;
+    }
+    .meme-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .canvas-container {
+        width: 40vw;
+        min-height: 70vh;
+    }
+    .meme-controller {
+        width: unset;
+        min-height: 70vh;
+    }
+    .meme-controller img {
+        width: 3em;
+    }
+    .stroke-color,
+    .font-color {
+        flex-direction: column;
+        align-items: center;
+    }
+    button input {
+        width: 3em;
+    }
 }

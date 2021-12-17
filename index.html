@@ -14,7 +14,7 @@
 <body onload="onInit()">
     <div class="page-container flex">
         <header>
-            <div class="header-container flex align-center main-layout">
+            <div class="header-container flex align-center ">
                 <div class="logo">memegen</div>
                 <nav class="main-nav">
                     <ul class="clean-list flex align-center">
@@ -41,7 +41,7 @@
                         </div>
 
                 </div>
-                <div>
+                <div class="grid-container flex">
                     <div class="gallery-container grid">
                     </div>
                 </div>
@@ -76,13 +76,13 @@
                     <option value="verdana">Verdana</option>
                     <option value="cambria">Cambria</option>
                   </select> </button>
-                    <button class="stroke-color"><img src="./img/ICONS/paint-board-and-brush.png" alt=" "><input
+                    <button class="stroke-color flex"><img src="./img/ICONS/paint-board-and-brush.png" alt=" "><input
                     type="color"
                     name="stroke-color"
                     value="#000000"
                     onchange="onChangeColor('stroke', this.value)"
                   /></button>
-                    <button class="font-color"><img src="./img/ICONS/text stroke.png" alt=" "><input
+                    <button class="font-color flex"><img src="./img/ICONS/text stroke.png" alt=" "><input
                     type="color"
                     name="font-color"
                     value="#ffffff"
