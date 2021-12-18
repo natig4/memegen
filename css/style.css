@@ -68,7 +68,8 @@ input {
 }
 
 .gallery-container .img-container img,
-.memes-gallery img {
+.memes-gallery img,
+.search-btn {
     border: 5px solid black;
     border-radius: 12px;
     opacity: 1;
@@ -143,7 +144,6 @@ main {
 
 .search-panel .search-input {
     background-color: white;
-    width: 30%;
 }
 
 .search-form {
@@ -151,7 +151,7 @@ main {
 }
 
 form input {
-    font-size: 0.6em;
+    font-size: 2em;
     font-family: Fuzzy;
     border-radius: 6px;
     padding-inline-start: 1em;
@@ -167,9 +167,9 @@ form input {
 
 .search-btn {
     align-self: center;
-    width: 3em;
-    height: 3em;
+    width: 7em;
     margin-inline-start: 1em;
+    border: none;
 }
 
 .search-indexes {
@@ -270,7 +270,8 @@ canvas {
     grid-template-areas: "str-line str-line str-line str-line str-line"/* / */
     " . switch-line add-line remove-line .  "/* / */
     "increase-font decrease-font align-left align-center align-right"/* / */
-    "font-family font-family font-family stroke-color font-color" "stickers-box stickers-box stickers-box stickers-box remove-sticker "/* / */
+    "font-family font-family font-family stroke-color font-color"/* / */
+    "stickers-box stickers-box stickers-box stickers-box remove-sticker "/* / */
     "download download . save save"
 }
 
@@ -450,6 +451,12 @@ button input {
     display: grid;
 }
 
+
+/* media queries */
+
+
+/* Tablet */
+
 @media (min-width: 760px) {
     body {
         font-size: 1em;
@@ -468,6 +475,9 @@ button input {
         line-height: 6.25rem;
     }
 }
+
+
+/* Desktop */
 
 @media (min-width: 1080px) {
     .main-layout {
