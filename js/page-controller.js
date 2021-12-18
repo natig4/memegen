@@ -35,8 +35,6 @@ function toggleView(el1, el2, el3) {
     $el2.addClass('hide')
     $el3.removeClass('flex')
     $el3.addClass('hide')
-        // $el4.removeClass('flex')
-        // $el4.addClass('hide')
 }
 
 function onNav(elLi) {
@@ -48,9 +46,6 @@ function onNav(elLi) {
         case 'Memes':
             toggleView('.memes-gallery', '.meme-container', '.main-content')
             renderMyMemes()
-            break;
-        case 'About':
-            console.log('about')
             break;
     }
 }

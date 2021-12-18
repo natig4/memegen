@@ -30,6 +30,15 @@ img {
     width: 100%;
 }
 
+.main-nav li:hover,
+.meme-controller>*:hover,
+.gallery-container .img-container img:hover,
+.main-nav li:hover,
+.memes-gallery img:hover {
+    opacity: 0.6;
+    box-shadow: 0px 0px 3px;
+}
+
 li,
 img,
 button,
@@ -51,6 +60,8 @@ input {
     color: white;
     line-height: 2.5em;
     font-size: 2em;
+    opacity: 1;
+    transition: 0.3s ease-in-out
 }
 
 .page-container {
@@ -87,6 +98,8 @@ header {
     width: 4em;
     color: white;
     line-height: 3.25rem;
+    opacity: 1;
+    transition: 0.3s ease-in-out, box-shadow 0.3s;
 }
 
 .main-nav li:last-of-type {
@@ -136,7 +149,7 @@ form input {
     width: fit-content;
 }
 
-.control-box {
+.search-box {
     width: 100%;
     justify-content: center;
 }
@@ -159,13 +172,23 @@ form input {
 }
 
 .gallery-container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2.5em;
     padding-bottom: 6.5em;
+    padding-inline-start: 1em;
+    padding-inline-end: 1em;
 }
 
 .gallery-container .img-container {
     width: 100%;
+}
+
+.gallery-container .img-container img,
+.memes-gallery img {
+    border: 5px solid black;
+    border-radius: 12px;
+    opacity: 1;
+    transition: 0.3s ease-in-out, box-shadow 0.3s;
 }
 
 .memes-gallery {
@@ -245,15 +268,17 @@ canvas {
     " . switch-line add-line remove-line .  "/* / */
     "increase-font decrease-font align-left align-center align-right"/* / */
     "font-family font-family font-family stroke-color font-color" "stickers-box stickers-box stickers-box stickers-box remove-sticker "/* / */
-    "download download share save save"
+    "download download . save save"
 }
 
 .meme-controller>* {
     color: black;
     background-color: white;
+    opacity: 1;
+    transition: 0.3s ease-in-out, box-shadow 0.3s;
 }
 
-.meme-controller button {
+.meme-controller>.meme-controller button {
     padding: 5.6px 5.3px 5.1px 5.3px;
     border-radius: 6px;
     background-color: #fff;
@@ -283,7 +308,7 @@ button input {
 
 .str-line input {
     font-size: 3em;
-    width: 100%;
+    width: 80%;
 }
 
 .switch-line {
@@ -381,13 +406,6 @@ button input {
     font-family: Fuzzy;
 }
 
-.share {
-    grid-area: share;
-    width: 6em;
-    font-size: 1.3em;
-    font-family: Fuzzy;
-}
-
 
 /* HELPERS */
 
@@ -463,5 +481,8 @@ button input {
     }
     .meme-controller img {
         width: 3em;
+    }
+    .gallery-container {
+        grid-template-columns: repeat(5, 1fr);
     }
 }
