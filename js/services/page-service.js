@@ -6,21 +6,28 @@ var gNextId = 0;
 var gFillterWord = 'all';
 var gFilter = true;
 _createImgs()
+var gKeywords
 
-
-const gKeywords = {
-    all: gImgs.length,
-    funny: countWords('funny'),
-    animal: countWords('animal'),
-    awkard: countWords('awkard'),
-    happy: countWords('happy'),
-    angry: countWords('angry'),
-    people: countWords('people'),
-    baby: countWords('baby'),
-    political: countWords('political'),
-    cute: countWords('cute'),
-    crazy: countWords('crazy')
-};
+function createKeyWords() {
+    var keyWords = loadFromStorage('KeyWordsDB')
+    if (!keyWords || keyWords.length === 0) {
+        keyWords = {
+            all: gImgs.length,
+            funny: countWords('funny'),
+            animal: countWords('animal'),
+            awkard: countWords('awkard'),
+            happy: countWords('happy'),
+            angry: countWords('angry'),
+            people: countWords('people'),
+            baby: countWords('baby'),
+            political: countWords('political'),
+            cute: countWords('cute'),
+            crazy: countWords('crazy')
+        }
+    }
+    console.log(keyWords)
+    gKeywords = keyWords
+}
 
 
 
@@ -34,7 +41,7 @@ function _createImg(imgUrl, keywords) {
 
 function _createImgs() {
     var imgs = loadFromStorage('imgsDB')
-    if (!imgs || !imgs.length) {
+    if (!imgs || !imgs.length === 0) {
         imgs = [
             _createImg('./img/meme-imgs-different-sizes/1.jpg', ['funny', 'happy', 'cute']),
             _createImg('./img/meme-imgs-different-sizes/2.jpg', ['happy', 'cute']),
@@ -72,6 +79,10 @@ function _saveImgsToStorage() {
     saveToStorage('imgsDB', gImgs)
 }
 
+function _saveKeyWordsToStorage() {
+    saveToStorage('KeyWordsDB', gKeywords)
+}
+
 function getImgs() {
     if (gFillterWord === 'all') return gImgs;
     return gImgs.filter((img) => img.keywords.includes(gFillterWord));
@@ -106,8 +117,9 @@ function getImgId() {
 function fillterBySearch(word) {
     gFillterWord = word;
     if (word !== 'all') {
-        gKeywords[word] = (gKeywords[word]) ? ++gKeywords[word] : 10;
+        gKeywords[word] = (gKeywords[word]) ? ++gKeywords[word] : 5;
     }
+    _saveKeyWordsToStorage()
 }
 
 function getKeywords() {

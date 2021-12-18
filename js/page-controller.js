@@ -4,6 +4,8 @@ function onInit() {
     window.addEventListener('submit', (ev) => {
         ev.preventDefault()
     })
+
+    createKeyWords()
     renderImgs()
     renderKeywords()
 }
@@ -92,7 +94,6 @@ function onKeyFillter(word) {
 function renderKeywords(txt = 'More...') {
     const isViewAllKeys = gIsFiltered() ? true : false;
     const keywords = getKeywords(isViewAllKeys);
-
     var strHtmls = '';
     for (const word in keywords) {
         strHtmls += `

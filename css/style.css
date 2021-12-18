@@ -151,7 +151,7 @@ main {
 }
 
 form input {
-    font-size: 2em;
+    font-size: 1em;
     font-family: Fuzzy;
     border-radius: 6px;
     padding-inline-start: 1em;
@@ -167,7 +167,7 @@ form input {
 
 .search-btn {
     align-self: center;
-    width: 7em;
+    width: 4em;
     margin-inline-start: 1em;
     border: none;
 }
