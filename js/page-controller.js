@@ -19,7 +19,7 @@ function renderImgs() {
     }
     const strHtmls = imgs.map(function(img) {
         return `<div class="img-container" >
-        <img class="img img${img.id}" onclick="onImg(${img.id})" src="./img/meme-imgs-square/${img.id}.jpg" alt=""></div>`
+        <img class="img img${img.id}" onclick="onImg(${img.id})" src="./img/meme-imgs-different-sizes/${img.id}.jpg" alt=""></div>`
     })
     imgsContainer.innerHTML = strHtmls.join('')
 

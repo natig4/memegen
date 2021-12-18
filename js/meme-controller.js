@@ -218,7 +218,6 @@ function renderMemeStickers() {
 }
 
 function onDownloadMeme(elLink) {
-    console.log(elLink)
     const memeContent = gElCanvas.toDataURL();
     elLink.href = memeContent;
 }

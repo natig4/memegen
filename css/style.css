@@ -169,13 +169,18 @@ form input {
 }
 
 .memes-gallery {
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 2em;
 }
 
 .memes-gallery h1 {
     font-size: 5em;
+}
+
+.memes-gallery img {
+    width: 30em;
 }
 
 footer {
