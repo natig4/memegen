@@ -4,7 +4,6 @@ function onInit() {
     window.addEventListener('submit', (ev) => {
         ev.preventDefault()
     })
-
     createKeyWords()
     renderImgs()
     renderKeywords()
