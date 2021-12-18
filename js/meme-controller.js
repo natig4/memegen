@@ -39,7 +39,10 @@ function onDown(ev) {
 
 function onUp() {
     if (getCurrentLine().isDrag) setLineDrag(false);
-    else if (getCurrentSticker().isDrag) setStickerDrag(false)
+    else if (getCurrentSticker()) {
+        getCurrentSticker().isDrag
+        setStickerDrag(false)
+    }
     gElCanvas.style.cursor = 'grab';
 }
 
