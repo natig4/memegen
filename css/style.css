@@ -47,6 +47,10 @@ input,
     border: none;
 }
 
+.btn-more {
+    margin-left: auto;
+}
+
 input {
     background-color: #ffffff;
 }
@@ -183,7 +187,7 @@ form input {
     gap: 2.5em;
     padding-bottom: 6.5em;
     padding-inline-start: 1em;
-    padding-inline-end: 1em;
+    padding-inline-end: 2em;
 }
 
 .gallery-container .img-container {
