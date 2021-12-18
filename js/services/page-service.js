@@ -25,7 +25,6 @@ function createKeyWords() {
             crazy: countWords('crazy')
         }
     }
-    console.log(keyWords)
     gKeywords = keyWords
 }
 

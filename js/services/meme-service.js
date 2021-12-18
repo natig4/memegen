@@ -97,7 +97,7 @@ function changeFontFamily(font) {
 
 function moveElement(diff, dir) {
     const line = getCurrentLine();
-    if (!line.isDrag) {
+    if (!line || !line.isDrag) {
         getCurrentSticker().pos[dir] += diff
         return
     }
@@ -106,7 +106,7 @@ function moveElement(diff, dir) {
 
 function changeLine() {
     const lines = getLines();
-    if (!lines.length) return;
+    if (lines.length === 0) return;
     if (gMeme.selectedLineIdx + 1 === lines.length) gMeme.selectedLineIdx = 0;
     else gMeme.selectedLineIdx++;
     _updateLineIdx(gMeme.selectedLineIdx);

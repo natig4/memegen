@@ -405,7 +405,7 @@ button input {
     font-family: Fuzzy;
     padding: 5.6px 5.3px 5.1px 5.3px;
     border-radius: 6px;
-    font-size: 1.3em;
+    font-size: 2em;
 }
 
 .download {
@@ -497,9 +497,6 @@ button input {
     .meme-controller {
         width: max-content;
         min-height: 70vh;
-    }
-    .meme-controller button {
-        font-size: 1.3em;
     }
     .meme-controller img {
         width: 3em;

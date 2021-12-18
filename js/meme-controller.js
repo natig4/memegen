@@ -38,11 +38,8 @@ function onDown(ev) {
 }
 
 function onUp() {
-    if (getCurrentLine().isDrag) setLineDrag(false);
-    else if (getCurrentSticker()) {
-        getCurrentSticker().isDrag
-        setStickerDrag(false)
-    }
+    if (getCurrentLine() && getCurrentLine().isDrag) setLineDrag(false);
+    else if (getCurrentSticker() && getCurrentSticker().isDrag) setStickerDrag(false)
     gElCanvas.style.cursor = 'grab';
 }
 
