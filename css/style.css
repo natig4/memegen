@@ -360,7 +360,6 @@ button input {
 
 .font-family {
     grid-area: font-family;
-    font-family: Fuzzy;
     width: 70%;
 }
 
@@ -385,7 +384,7 @@ button input {
 
 .font-family select {
     font-family: Fuzzy;
-    width: 100%;
+    width: -webkit-fill-available;
     border: none;
 }
 
@@ -402,7 +401,6 @@ button input {
 .download,
 .save {
     width: 6em;
-    font-family: Fuzzy;
     padding: 5.6px 5.3px 5.1px 5.3px;
     border-radius: 6px;
     font-size: 2em;
@@ -414,6 +412,7 @@ button input {
 
 .save {
     grid-area: save;
+    font-family: Fuzzy;
 }
 
 
