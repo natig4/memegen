@@ -31,11 +31,10 @@ img {
 }
 
 .main-nav li:hover,
-.meme-controller>*:not(.stickers-box):hover,
+.meme-controller>*:hover,
 .gallery-container .img-container img:hover,
 .main-nav li:hover,
-a:hover,
-.sticker:hover {
+a:hover {
     opacity: 0.6;
 }
 
@@ -172,7 +171,6 @@ form input {
     width: 4em;
     margin-inline-start: 1em;
     border: none;
-    background-color: white;
 }
 
 .search-indexes {
@@ -278,14 +276,9 @@ canvas {
     "download download . save save"
 }
 
-.meme-controller>*:not(.stickers-box) {
+.meme-controller>* {
     color: black;
     background-color: white;
-    opacity: 1;
-    transition: 0.3s ease-in-out, box-shadow 0.3s;
-}
-
-.sticker {
     opacity: 1;
     transition: 0.3s ease-in-out, box-shadow 0.3s;
 }
@@ -303,7 +296,7 @@ canvas {
 }
 
 .sticker img {
-    width: 4.5em;
+    width: 4em;
 }
 
 button input {
@@ -342,7 +335,7 @@ button input {
 
 .stickers-box {
     grid-area: stickers-box;
-    background-color: transparent;
+    border-radius: 6px;
 }
 
 .increase-font {
@@ -367,7 +360,7 @@ button input {
 
 .font-family {
     grid-area: font-family;
-    width: 15em;
+    width: 70%;
 }
 
 .select-font-family {
@@ -415,7 +408,6 @@ button input {
 
 .download {
     grid-area: download;
-    margin-inline-start: 1em;
 }
 
 .save {
@@ -513,8 +505,5 @@ button input {
     }
     .str-line input {
         width: 100%;
-    }
-    .select-font-family {
-        font-size: 2.35em;
     }
 }
