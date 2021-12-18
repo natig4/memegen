@@ -27,8 +27,10 @@ function addTouchListeners() {
 
 function onDown(ev) {
     const pos = getEvPos(ev);
-    if (!isLineClicked(pos)) return;
-    setLineDrag(true);
+    if (isLineClicked(pos)) setLineDrag(true);
+    else if (isStcikeriClicked(pos)) {
+        setStickerDrag(true);
+    } else return
     gStartPos = pos;
     gElCanvas.style.cursor = 'grab';
     renderTextInput();
@@ -36,27 +38,30 @@ function onDown(ev) {
 }
 
 function onUp() {
-    setLineDrag(false);
+    if (getCurrentLine().isDrag) setLineDrag(false);
+    else if (getCurrentSticker().isDrag) setStickerDrag(false)
     gElCanvas.style.cursor = 'grab';
 }
 
 function onMove(ev) {
     const line = getCurrentLine();
-    if (!line || !line.isDrag) return;
+    const sticker = getCurrentSticker();
+    if (!line || !line.isDrag)
+        if ((!sticker || !sticker.isDrag)) return
     const pos = getEvPos(ev);
     const dx = pos.x - gStartPos.x;
     const dy = pos.y - gStartPos.y;
-    moveLine(dx, 'x');
-    moveLine(dy, 'y');
+    moveElement(dx, 'x');
+    moveElement(dy, 'y');
     gElCanvas.style.cursor = 'grabbing';
     gStartPos = pos;
     renderCanvas();
 }
 
 function renderStickers() {
-    const stickers = getStickers();
+    const stickers = getAllStickers();
     const strHtmls = stickers.map((sticker) => {
-        return `<div class="sticker" onclick="onAddSticker('${sticker.id}', '${sticker.src}')"><img src="${sticker.src}" /></div>`;
+        return `<div class="sticker" onclick="onAddSticker('${sticker.src}')"><img src="${sticker.src}" /></div>`;
     });
 
     const elContainer = document.querySelector('.stickers-container');
@@ -100,7 +105,7 @@ function onChangeLine() {
 
 function onMoveLine(direction) {
     const diff = direction === 'up' ? -5 : 5;
-    moveLine(diff, 'y');
+    moveElement(diff, 'y');
     renderCanvas();
 }
 
@@ -119,6 +124,12 @@ function onRemoveLine() {
     document.querySelector('.str-input').value = ""
     renderCanvas();
 }
+
+function onRemoveSticker() {
+    removeSticker();
+    renderCanvas();
+}
+
 
 function onChangeAlign(direction) {
     changeAlign(direction);
@@ -150,17 +161,15 @@ function drawText() {
 function drawBorder() {
     const line = getCurrentLine();
     if (!line) return;
-
     gCtx.beginPath();
     if (line.align === 'left') {
-        if (window.screen.width > 1000) gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.5);
+        if (window.screen.width > 1000) gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
         else gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
-
     } else if (line.align === 'center') {
-        if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.5);
+        if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
         else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
     } else if (line.align === 'right') {
-        if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.5);
+        if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
         else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size)
     }
     gCtx.lineWidth = 2;
@@ -174,7 +183,7 @@ function renderCanvas(imgId) {
     gCtx = gElCanvas.getContext('2d')
     if (!imgId) imgId = getImgId()
     var img = new Image;
-    img.src = './img/meme-imgs/' + imgId + '.jpg'
+    img.src = getUrlById(imgId)
     img.onload = function() {
         var scale = Math.max(gElCanvas.width / img.width, gElCanvas.height / img.height);
         var x = (gElCanvas.width / 2) - (img.width / 2) * scale;

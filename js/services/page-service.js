@@ -27,7 +27,7 @@ const gKeywords = {
 function _createImg(imgUrl, keywords) {
     return {
         id: idMaker(),
-        imgUrl: `<img src="img/${imgUrl}.png" />`,
+        imgUrl: imgUrl,
         keywords: keywords
     }
 }
@@ -36,31 +36,31 @@ function _createImgs() {
     var imgs = loadFromStorage('imgsDB')
     if (!imgs || !imgs.length) {
         imgs = [
-            _createImg('./img/meme-imgs/1.jpg', ['funny', 'happy', 'cute']),
-            _createImg('./img/meme-imgs/2.jpg', ['happy', 'cute']),
-            _createImg('./img/meme-imgs/3.jpg', ['political', 'funny', 'people']),
-            _createImg('./img/meme-imgs/4.jpg', ['happy', 'cute', 'animal']),
-            _createImg('./img/meme-imgs/5.jpg', ['happy', 'cute', 'baby']),
-            _createImg('./img/meme-imgs/6.jpg', ['happy', 'funny', 'baby']),
-            _createImg('./img/meme-imgs/7.jpg', ['animal', 'cute', 'happy']),
-            _createImg('./img/meme-imgs/8.jpg', ['people', 'happy', 'awkard', 'crazy']),
-            _createImg('./img/meme-imgs/9.jpg', ['baby', 'funny', 'awkard', 'crazy']),
-            _createImg('./img/meme-imgs/10.jpg', ['people', 'awkard']),
-            _createImg('./img/meme-imgs/11.jpg', ['people', 'awkard', 'crazy']),
-            _createImg('./img/meme-imgs/12.jpg', ['political', 'people', 'awkard']),
-            _createImg('./img/meme-imgs/13.jpg', ['baby', 'awkard', 'crazy']),
-            _createImg('./img/meme-imgs/14.jpg', ['political', 'funny', 'people']),
-            _createImg('./img/meme-imgs/15.jpg', ['baby', 'awkard', 'funny']),
-            _createImg('./img/meme-imgs/16.jpg', ['animal', 'awkard', 'funny']),
-            _createImg('./img/meme-imgs/17.jpg', ['political', 'funny', 'people']),
-            _createImg('./img/meme-imgs/18.jpg', ['political', 'funny', 'people']),
-            _createImg('./img/meme-imgs/19.jpg', ['sport', 'people']),
-            _createImg('./img/meme-imgs/20.jpg', [, 'funny', 'people']),
-            _createImg('./img/meme-imgs/21.jpg', ['funny', 'people']),
-            _createImg('./img/meme-imgs/22.jpg', ['people']),
-            _createImg('./img/meme-imgs/23.jpg', ['people']),
-            _createImg('./img/meme-imgs/24.jpg', ['people']),
-            _createImg('./img/meme-imgs/25.jpg', ['political', 'funny', 'people']),
+            _createImg('./img/meme-imgs-square/1.jpg', ['funny', 'happy', 'cute']),
+            _createImg('./img/meme-imgs-square/2.jpg', ['happy', 'cute']),
+            _createImg('./img/meme-imgs-square/3.jpg', ['political', 'funny', 'people']),
+            _createImg('./img/meme-imgs-square/4.jpg', ['happy', 'cute', 'animal']),
+            _createImg('./img/meme-imgs-square/5.jpg', ['happy', 'cute', 'baby']),
+            _createImg('./img/meme-imgs-square/6.jpg', ['happy', 'funny', 'baby']),
+            _createImg('./img/meme-imgs-square/7.jpg', ['animal', 'cute', 'happy']),
+            _createImg('./img/meme-imgs-square/8.jpg', ['people', 'happy', 'awkard', 'crazy']),
+            _createImg('./img/meme-imgs-square/9.jpg', ['baby', 'funny', 'awkard', 'crazy']),
+            _createImg('./img/meme-imgs-square/10.jpg', ['people', 'awkard']),
+            _createImg('./img/meme-imgs-square/11.jpg', ['people', 'awkard', 'crazy']),
+            _createImg('./img/meme-imgs-square/12.jpg', ['political', 'people', 'awkard']),
+            _createImg('./img/meme-imgs-square/13.jpg', ['baby', 'awkard', 'crazy']),
+            _createImg('./img/meme-imgs-square/14.jpg', ['political', 'funny', 'people']),
+            _createImg('./img/meme-imgs-square/15.jpg', ['baby', 'awkard', 'funny']),
+            _createImg('./img/meme-imgs-square/16.jpg', ['animal', 'awkard', 'funny']),
+            _createImg('./img/meme-imgs-square/17.jpg', ['political', 'funny', 'people']),
+            _createImg('./img/meme-imgs-square/18.jpg', ['political', 'funny', 'people']),
+            _createImg('./img/meme-imgs-square/19.jpg', ['sport', 'people']),
+            _createImg('./img/meme-imgs-square/20.jpg', [, 'funny', 'people']),
+            _createImg('./img/meme-imgs-square/21.jpg', ['funny', 'people']),
+            _createImg('./img/meme-imgs-square/22.jpg', ['people']),
+            _createImg('./img/meme-imgs-square/23.jpg', ['people']),
+            _createImg('./img/meme-imgs-square/24.jpg', ['people']),
+            _createImg('./img/meme-imgs-square/25.jpg', ['political', 'funny', 'people']),
         ]
     }
     gImgs = imgs

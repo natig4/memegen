@@ -1,13 +1,14 @@
 'use strict';
 var gNextIdStickers = 0;
 const gStickers = [
-    { id: idMakerStickers(), src: './img/stickers/flirty-smiley.png' },
-    { id: idMakerStickers(), src: './img/stickers/nerd-emoji.png' },
-    { id: idMakerStickers(), src: './img/stickers/pirate-emoji.png' },
+    { id: 1, src: './img/stickers/flirty-smiley.png' },
+    { id: 2, src: './img/stickers/nerd-emoji.png' },
+    { id: 3, src: './img/stickers/pirate-emoji.png' },
 ];
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
+    selectedStcikerIdx: 0,
     lines: [],
     stickers: []
 }
@@ -24,6 +25,7 @@ function updateSelectedMeme(imgId) {
     gMeme = {
         selectedImgId: imgId,
         selectedLineIdx: 0,
+        selectedStcikerIdx: 0,
         lines: [],
         stickers: []
     }
@@ -68,6 +70,10 @@ function getCurrentLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
 }
 
+function getCurrentSticker() {
+    return gMeme.stickers[gMeme.selectedStcikerIdx]
+}
+
 function getLines() {
     return gMeme.lines;
 }
@@ -89,9 +95,13 @@ function changeFontFamily(font) {
     getCurrentLine().fontFamily = font;
 }
 
-function moveLine(diff, dir) {
-
-    getCurrentLine().pos[dir] += diff;
+function moveElement(diff, dir) {
+    const line = getCurrentLine();
+    if (!line.isDrag) {
+        getCurrentSticker().pos[dir] += diff
+        return
+    }
+    line.pos[dir] += diff
 }
 
 function changeLine() {
@@ -141,8 +151,23 @@ function removeLine() {
     _updateLineIdx(0);
 }
 
+function removeSticker() {
+    const stickers = getMemeStickers();
+    if (!stickers.length) return;
+    stickers.splice(gMeme.selectedStcikerIdx, 1);
+    _updateStickerIdx(0);
+}
+
 function _updateLineIdx(idx) {
     gMeme.selectedLineIdx = idx;
+}
+
+function _updateStickerIdx(idx) {
+    gMeme.selectedStcikerIdx = idx;
+}
+
+function _updateStickerIdx(idx) {
+    gMeme.selectedStcikerIdx = idx;
 }
 
 
@@ -166,13 +191,16 @@ function getEvPos(ev) {
 
 function isLineClicked(clickedPos) {
     const lines = getLines();
+    var difference = 0;
     const clickedLineIdx = lines.findIndex((line) => {
         const lineWidth = gCtx.measureText(line.txt).width;
         const lineHeight = line.size;
+        if (line.align === 'right') difference = -lineWidth
+        else if (line.align === 'center') difference = -lineWidth / 2
         return (
-            clickedPos.x >= line.pos.x - lineWidth / 2 - 10 &&
-            clickedPos.x <= line.pos.x + lineWidth + 20 &&
-            clickedPos.y >= line.pos.y - 10 &&
+            clickedPos.x >= line.pos.x + difference &&
+            clickedPos.x <= line.pos.x + lineWidth &&
+            clickedPos.y >= line.pos.y - 20 &&
             clickedPos.y <= line.pos.y + lineHeight + 20
         );
     });
@@ -182,9 +210,32 @@ function isLineClicked(clickedPos) {
     }
 }
 
+function isStcikeriClicked(clickedPos) {
+    const stickers = getMemeStickers();
+    const clickedStickerIdx = stickers.findIndex((sticker) => {
+        const stickerWidth = gCtx.measureText(sticker.txt).width;
+        const stickerHeight = sticker.size;
+        return (
+            clickedPos.x >= sticker.pos.x - stickerWidth / 2 - 10 &&
+            clickedPos.x <= sticker.pos.x + stickerWidth + 20 &&
+            clickedPos.y >= sticker.pos.y - 10 &&
+            clickedPos.y <= sticker.pos.y + stickerHeight + 20
+        );
+    });
+    if (clickedStickerIdx !== -1) {
+        _updateStickerIdx(clickedStickerIdx);
+        return stickers[clickedStickerIdx];
+    }
+}
+
 function setLineDrag(isDrag) {
     const line = getCurrentLine();
     line.isDrag = isDrag;
+}
+
+function setStickerDrag(isDrag) {
+    const sticker = getCurrentSticker();
+    sticker.isDrag = isDrag;
 }
 
 function saveMeme(meme) {
@@ -202,24 +253,26 @@ function _saveMemesToStorage() {
     saveToStorage(STORAGE_KEY, gMemes);
 }
 
-function addSticker(id, src) {
-    const newSticker = _createSticker(id, src);
+function addSticker(src) {
+    const newSticker = _createSticker(src);
     gMeme.stickers.push(newSticker);
 }
 
-function _createSticker(id, src) {
-    const newPos = { x: gElCanvas.width / 2, y: gElCanvas.height / 2 };
+function _createSticker(src) {
+    const newPos = { x: gElCanvas.width / 2, y: gNextLineHeight };
+    gNextLineHeight += 20
+    if (gNextLineHeight > gElCanvas.height - 300) gNextLineHeight = 0
     return {
-        id,
+        id: idMakerStickers(),
         src,
         size: 20,
-        pos: { x: newPos.x, y: newPos.y },
+        pos: { x: newPos.x, y: newPos.y + gNextLineHeight },
         isDrag: false,
     };
+
 }
 
-
-function getStickers() {
+function getAllStickers() {
     return gStickers;
 }
 
