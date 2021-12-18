@@ -64,7 +64,7 @@ function renderMyMemes() {
     const memeSize = Object.keys(memes).length;
     if (memeSize) {
         strHtmls = memes.map((meme) => {
-            return `<img src="${meme}"/>`;
+            return `<a href="#" onclick="onDownloadMeme(this) " download="meme.jpg"><img src="${meme}"/></a>`;
         });
     } else {
         strHtmls = `<h1>No saved Memes Go ahead and create one 🙂</h1>`;
