@@ -323,7 +323,7 @@
     .str-line input {
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 3em;
-        width: 100%;
+        width: 11em;
         height: 1em;
         text-align: center;
     }
@@ -421,9 +421,8 @@
     .remove-borders {
         grid-area: remove-borders;
         border-radius: 6px;
-        font-size: 1.7em;
-        margin-inline-start: 0.5em;
-        width: 9em;
+        font-size: 2em;
+        margin-inline-start: 1em;
     }
     
     .download {
@@ -528,8 +527,5 @@
         }
         .remove-borders {
             width: 6em
-        }
-        .str-line input {
-            width: 11em;
         }
     }
