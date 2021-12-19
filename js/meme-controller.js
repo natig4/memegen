@@ -25,9 +25,6 @@ function renderCanvas(imgId, bordersType) {
             drawBorder('stciker')
         }
         drawBorder();
-
-
-
     }
 }
 

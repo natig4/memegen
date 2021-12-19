@@ -276,7 +276,7 @@
         "increase-font decrease-font align-left align-center align-right"/* / */
         "font-family font-family font-family stroke-color font-color"/* / */
         "stickers-box stickers-box stickers-box stickers-box remove-sticker "/* / */
-        " remove-borders remove-borders . download download" " share share .  save save"
+        " remove-borders remove-borders . download download" "save save . share share  "
     }
     
     .meme-controller>*:not(.stickers-box) {
@@ -433,12 +433,13 @@
     
     .share {
         grid-area: share;
-        margin-inline-start: 1em;
+        margin-inline-end: 1em;
     }
     
     .save {
+        min-width: 6em;
         grid-area: save;
-        margin-inline-end: 1em;
+        margin-inline-start: 1em;
     }
     
     .share,
