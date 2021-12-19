@@ -20,9 +20,14 @@ function renderCanvas(imgId, bordersType) {
         renderTextInput();
         renderMemeStickers();
         if (img.type === 'remove-borders') return
-        else if (img.type === 'toggleRemoveBordersButton') toggleViewRemoveBorders('.remove-borders')
+        else if (img.type === 'toggleRemoveBordersButton') {
+            toggleViewRemoveBorders('.remove-borders')
+            drawBorder('stciker')
+        }
         drawBorder();
-        renderMemeStickers('border');
+
+
+
     }
 }
 
@@ -40,7 +45,6 @@ function toggleViewButtons(view) {
         } else {
             $(element).removeClass('hide')
         }
-        console.log(viewNames, element)
     });
 }
 
@@ -87,7 +91,7 @@ function onDown(ev) {
     gStartPos = pos;
     gElCanvas.style.cursor = 'grab';
     renderTextInput();
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton');
 }
 
 function onUp() {
@@ -108,7 +112,7 @@ function onMove(ev) {
     moveElement(dy, 'y');
     gElCanvas.style.cursor = 'grabbing';
     gStartPos = pos;
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function renderStickers() {
@@ -172,7 +176,7 @@ function onMoveLine(direction) {
 
 function onCreateLine() {
     if (getLinesAmount() === 0) onAddLine();
-    toggleViewRemoveBorders('.remove-borders')
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onAddLine() {
@@ -238,8 +242,8 @@ function drawBorder(sticker) {
         if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
         else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size)
     } else {
-        if (window.screen.width > 1000) gCtx.rect(line.pos.x, line.pos.y, 50, 50);
-        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size)
+        if (window.screen.availWidth > 1000) gCtx.rect(line.pos.x, line.pos.y, 50, 50);
+        else gCtx.rect(line.pos.x, line.pos.y, 50, line.size + 30)
     }
     gCtx.lineWidth = 2;
     gCtx.strokeStyle = line.strokeColor;
@@ -262,13 +266,13 @@ function onAddSticker(id, dec) {
     renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
-function renderMemeStickers(border) {
+function renderMemeStickers() {
     const stickers = getMemeStickers();
     stickers.forEach((sticker) => {
         const img = new Image();
         img.src = sticker.src;
         gCtx.drawImage(img, sticker.pos.x, sticker.pos.y, 50, 50);
-        if (border) drawBorder('sticker')
+
     });
 }
 
