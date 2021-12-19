@@ -66,6 +66,7 @@
         color: white;
         line-height: 2.5em;
         font-size: 2em;
+        border-radius: 30px;
         opacity: 1;
         transition: 0.3s ease-in-out
     }
@@ -375,7 +376,7 @@
     }
     
     .select-font-family {
-        font-size: 2.5em;
+        font-size: 2.3em;
     }
     
     .stickers-box button {

@@ -35,17 +35,14 @@
                     </button>
                     </form>
                     <section class="key-words flex align-center">
-
                         <div class="search-indexes flex clean-list align-center">
                         </div>
-
                 </div>
                 <div class="grid-container flex">
                     <div class="gallery-container grid">
                     </div>
                 </div>
             </div>
-
             <div class="meme-container hide">
                 <div class="canvas-container">
                     <canvas id="my-canvas"></canvas>
@@ -56,7 +53,6 @@
                     <button class="add-line" onclick="onAddLine()"><img src="./img/ICONS/add.png" alt=""></button>
                     <button class="remove-line" onclick="onRemoveLine()"><img src="./img/ICONS/trash.png" alt=""></button>
                     <div class="stickers-box flex">
-
                         <div class="stickers-container flex align-center">
                         </div>
                     </div>
@@ -70,22 +66,22 @@
                     <select class="select-font-family" onchange="onChangeFontFamily(this.value)">
                     <option value="impact">Impact</option>
                     <option value="Arial">Arial</option>
-                    <option value="times">Times new roman</option>
                     <option value="verdana">Verdana</option>
                     <option value="cambria">Cambria</option>
-                  </select> </button>
+                    <option value="times">Times new roman</option>
+                    </select> </button>
                     <button class="stroke-color flex"><img src="./img/ICONS/paint-board-and-brush.png" alt=" "><input
                     type="color"
                     name="stroke-color"
                     value="#000000"
                     onchange="onChangeColor('stroke', this.value)"
-                  /></button>
+                    /></button>
                     <button class="font-color flex"><img src="./img/ICONS/text stroke.png" alt=" "><input
                     type="color"
                     name="font-color"
                     value="#ffffff"
                     onchange="onChangeColor('font', this.value)"
-                  /></button>
+                    /></button>
                     <a class="download hide" href="#" onclick="onDownloadMeme(this,event)" download="meme.jpg">Download</a>
                     <button class="save hide " onclick="onSaveMeme(this)">Save</button>
                     <a class="share hide ">Share</a>

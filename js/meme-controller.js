@@ -26,6 +26,7 @@ function renderCanvas(imgId, bordersType) {
         }
         drawBorder();
     }
+    document.querySelector('.str-input').focus()
 }
 
 function onRemoveBorders() {
@@ -231,13 +232,13 @@ function drawBorder(sticker) {
     gCtx.beginPath();
     if (line.align === 'left') {
         if (window.screen.width > 1000) gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
-        else gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
+        else gCtx.rect(line.pos.x, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size - 10);
     } else if (line.align === 'center') {
         if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
-        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size);
+        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width / 2, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size - 10);
     } else if (line.align === 'right') {
         if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
-        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size)
+        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size - 10)
     } else {
         if (window.screen.availWidth > 1000) gCtx.rect(line.pos.x, line.pos.y, 50, 50);
         else gCtx.rect(line.pos.x, line.pos.y, 50, line.size + 30)
