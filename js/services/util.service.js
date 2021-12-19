@@ -20,13 +20,11 @@ function $(selectorOrEl) {
 }
 
 function toggleActive(element, arr) {
-    console.log(element, arr)
     var lis = document.querySelectorAll(`${arr}`)
     lis.forEach(li => {
         li.classList.remove('active')
     });
     if (element) {
         element.classList.add('active');
-        console.log(element)
     }
 }

@@ -38,6 +38,7 @@ function toggleView(flexView) {
 
 
 
+
 function onNav(elLi) {
     toggleActive(elLi, 'ul li')
     switch (elLi.innerHTML) {
@@ -71,7 +72,7 @@ function renderMyMemes() {
 function onSearch(ev) {
     ev.preventDefault();
     const elSearch = document.querySelector('input[name="search"]');
-    fillterBySearch(elSearch.value);
+    fillterBySearch(elSearch.value.toLowerCase());
     elSearch.value = '';
     renderKeywords();
     renderImgs();

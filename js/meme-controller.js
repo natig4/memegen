@@ -4,11 +4,11 @@ var gCtx
 var gStartPos
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
-function renderCanvas(imgId) {
+function renderCanvas(imgId, bordersType) {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     var img = new Image;
-    if (typeof imgId === 'string') img.type = imgId
+    if (bordersType) img.type = bordersType
     if (!imgId || typeof imgId === 'string') imgId = getImgId()
     img.src = getUrlById(imgId)
     img.onload = function() {
@@ -19,23 +19,42 @@ function renderCanvas(imgId) {
         drawText();
         renderTextInput();
         renderMemeStickers();
-        if (img.type === 'save') {
-            const meme = gElCanvas.toDataURL('image/jpeg');
-            saveMeme(meme);
-        } else if (img.type === 'no-borders') {
-            return
-        } else {
-            drawBorder();
-            renderMemeStickers('border');
-        }
+        if (img.type === 'remove-borders') return
+        else if (img.type === 'toggleRemoveBordersButton') toggleViewRemoveBorders('.remove-borders')
+        drawBorder();
+        renderMemeStickers('border');
     }
 }
 
-
 function onRemoveBorders() {
-    renderCanvas('no-borders')
+    uploadImg()
+    renderCanvas(undefined, 'remove-borders')
+    toggleViewButtons('.remove-borders')
 }
 
+function toggleViewButtons(view) {
+    const viewNames = ['.download', '.save', '.remove-borders', '.share']
+    viewNames.forEach(element => {
+        if (element === view) {
+            $(element).addClass('hide')
+        } else {
+            $(element).removeClass('hide')
+        }
+        console.log(viewNames, element)
+    });
+}
+
+function toggleViewRemoveBorders(view) {
+    document.querySelector('.save').innerText = 'Save'
+    const viewNames = ['.download', '.save', '.remove-borders', '.share']
+    viewNames.forEach(element => {
+        if (element === view) {
+            $(element).removeClass('hide')
+        } else {
+            $(element).addClass('hide')
+        }
+    });
+}
 
 
 function addListeners() {
@@ -106,7 +125,7 @@ function onImg(imgId) {
     document.querySelector('.str-input').value = ''
     updateSelectedMeme(imgId)
     renderStickers()
-    renderCanvas(imgId)
+    renderCanvas(imgId, 'toggleRemoveBordersButton')
     addListeners()
     toggleView('.meme-container')
     resizeCanvas()
@@ -114,68 +133,69 @@ function onImg(imgId) {
 
 function onSetLineTxt(txt) {
     setLineTxt(txt);
-    renderCanvas()
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onChangeColor(type, color) {
     changeColor(type, color);
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onChangeFontSize(diff) {
     changeFontSize(diff);
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onChangeFontFamily(font) {
     changeFontFamily(font);
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onChangeLine() {
     var line = changeLine();
     if (!line) return;
     onSetLineTxt(line.txt);
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onChangeSticker() {
     var sticker = changeSticker()
     if (!sticker) return;
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onMoveLine(direction) {
     const diff = direction === 'up' ? -5 : 5;
     moveElement(diff, 'y');
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onCreateLine() {
     if (getLinesAmount() === 0) onAddLine();
+    toggleViewRemoveBorders('.remove-borders')
 }
 
 function onAddLine() {
     const font = document.querySelector('.select-font-family').value;
     addLine(font);
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onRemoveLine() {
     removeLine();
     document.querySelector('.str-input').value = ""
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function onRemoveSticker() {
     removeSticker();
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 
 function onChangeAlign(direction) {
     changeAlign(direction);
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function renderTextInput() {
@@ -239,7 +259,7 @@ function onAddSticker(id, dec) {
     if (getMemeStickers().length > 1) {
         onChangeSticker()
     }
-    renderCanvas();
+    renderCanvas(undefined, 'toggleRemoveBordersButton')
 }
 
 function renderMemeStickers(border) {
@@ -254,11 +274,14 @@ function renderMemeStickers(border) {
 
 
 function onDownloadMeme(elLink) {
-    renderCanvas('download')
+    renderCanvas(undefined, 'remove-borders')
     const memeContent = gElCanvas.toDataURL();
     elLink.href = memeContent;
 }
 
-function onSaveMeme() {
-    renderCanvas('save')
+function onSaveMeme(elBtn) {
+    renderCanvas(undefined, 'remove-borders')
+    const meme = gElCanvas.toDataURL('image/jpeg');
+    saveMeme(meme);
+    elBtn.innerText = 'Saved'
 }

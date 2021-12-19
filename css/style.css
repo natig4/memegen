@@ -43,7 +43,8 @@ li,
 img,
 button,
 input,
-.btn-more {
+.btn-more,
+.share {
     cursor: pointer;
     border: none;
 }
@@ -417,16 +418,12 @@ button input {
     width: 6em;
 }
 
-.remove-borders,
-.download {
-    width: 9em;
-}
-
 .remove-borders {
     grid-area: remove-borders;
     border-radius: 6px;
     font-size: 2em;
     margin-inline-start: 1em;
+    width: 9em;
 }
 
 .download {
@@ -544,5 +541,8 @@ button input {
     }
     .str-line input {
         width: 11em;
+    }
+    .remove-borders {
+        width: 6em
     }
 }
