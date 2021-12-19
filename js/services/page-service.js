@@ -40,7 +40,7 @@ function _createImg(imgUrl, keywords) {
 
 function _createImgs() {
     var imgs = loadFromStorage('imgsDB')
-    if (!imgs || !imgs.length === 0) {
+    if (!imgs || !imgs.length) {
         imgs = [
             _createImg('./img/meme-imgs-different-sizes/1.jpg', ['funny', 'happy', 'cute']),
             _createImg('./img/meme-imgs-different-sizes/2.jpg', ['happy', 'cute']),

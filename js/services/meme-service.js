@@ -33,6 +33,7 @@ function updateSelectedMeme(imgId) {
 
 function setLineTxt(txt) {
     const line = getCurrentLine();
+    if (!line) return;
     line.txt = txt;
 }
 
@@ -54,7 +55,7 @@ function createLine(pos, font) {
     } else if (gMeme.lines.length !== 0) {
         line = {
             pos: pos,
-            txt: 'Enter Text here',
+            txt: '',
             size: gMeme.lines[gMeme.selectedLineIdx].size,
             fontFamily: gMeme.lines[gMeme.selectedLineIdx].fontFamily,
             align: gMeme.lines[gMeme.selectedLineIdx].align,
@@ -92,7 +93,11 @@ function changeFontSize(diff) {
 }
 
 function changeFontFamily(font) {
+    const input = document.querySelector('.str-input')
+    input.style.fontFamily = font
+    if (!getCurrentLine()) return
     getCurrentLine().fontFamily = font;
+
 }
 
 function moveElement(diff, dir) {
@@ -106,11 +111,20 @@ function moveElement(diff, dir) {
 
 function changeLine() {
     const lines = getLines();
-    if (lines.length === 0) return;
+    if (lines.length === 0 || !lines) return;
     if (gMeme.selectedLineIdx + 1 === lines.length) gMeme.selectedLineIdx = 0;
     else gMeme.selectedLineIdx++;
     _updateLineIdx(gMeme.selectedLineIdx);
     return lines[gMeme.selectedLineIdx];
+}
+
+function changeSticker() {
+    const stickers = getMemeStickers();
+    if (stickers.length === 0 || !stickers) return;
+    if (gMeme.selectedStcikerIdx + 1 === stickers.length) gMeme.selectedStcikerIdx = 0;
+    else gMeme.selectedStcikerIdx++;
+    _updateStickerIdx(gMeme.selectedStcikerIdx)
+    return stickers[gMeme.selectedStcikerIdx];
 }
 
 function changeAlign(alignDir) {
@@ -165,12 +179,6 @@ function _updateLineIdx(idx) {
 function _updateStickerIdx(idx) {
     gMeme.selectedStcikerIdx = idx;
 }
-
-function _updateStickerIdx(idx) {
-    gMeme.selectedStcikerIdx = idx;
-}
-
-
 
 
 function getEvPos(ev) {
@@ -245,7 +253,7 @@ function saveMeme(meme) {
 
 function getSavedMemes() {
     var memes = loadFromStorage(STORAGE_KEY);
-    if (!memes) return []
+    if (!memes || memes.length === 0) return []
     else return memes;
 }
 

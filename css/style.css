@@ -31,10 +31,11 @@ img {
 }
 
 .main-nav li:hover,
-.meme-controller>*:hover,
+.meme-controller>*:not(.stickers-box):hover,
 .gallery-container .img-container img:hover,
 .main-nav li:hover,
-a:hover {
+a:not(.fa):hover,
+.sticker:hover {
     opacity: 0.6;
 }
 
@@ -161,7 +162,7 @@ form input {
     width: fit-content;
 }
 
-.search-box {
+.key-words {
     width: 100%;
     justify-content: center;
 }
@@ -171,6 +172,7 @@ form input {
     width: 4em;
     margin-inline-start: 1em;
     border: none;
+    background-color: white;
 }
 
 .search-indexes {
@@ -267,23 +269,28 @@ canvas {
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-template-areas: "str-line str-line str-line str-line str-line"/* / */
     " . switch-line add-line remove-line .  "/* / */
     "increase-font decrease-font align-left align-center align-right"/* / */
     "font-family font-family font-family stroke-color font-color"/* / */
     "stickers-box stickers-box stickers-box stickers-box remove-sticker "/* / */
-    "download download . save save"
+    " remove-borders remove-borders . download download" " share share .  save save"
 }
 
-.meme-controller>* {
+.meme-controller>*:not(.stickers-box) {
     color: black;
     background-color: white;
     opacity: 1;
-    transition: 0.3s ease-in-out, box-shadow 0.3s;
+    transition: 0.3s ease-in-out
 }
 
-.meme-controller button:not(.save) {
+.sticker {
+    opacity: 1;
+    transition: 0.3s ease-in-out
+}
+
+.meme-controller button:not(.save, .remove-borders, .share) {
     font-size: 1em;
     padding: 5.6px 5.3px 5.1px 5.3px;
     border-radius: 6px;
@@ -296,7 +303,7 @@ canvas {
 }
 
 .sticker img {
-    width: 4em;
+    width: 4.5em;
 }
 
 button input {
@@ -313,8 +320,11 @@ button input {
 }
 
 .str-line input {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 3em;
-    width: 80%;
+    width: 100%;
+    height: 1em;
+    text-align: center;
 }
 
 .switch-line {
@@ -335,7 +345,7 @@ button input {
 
 .stickers-box {
     grid-area: stickers-box;
-    border-radius: 6px;
+    background-color: transparent;
 }
 
 .increase-font {
@@ -360,7 +370,7 @@ button input {
 
 .font-family {
     grid-area: font-family;
-    width: 70%;
+    width: 15em;
 }
 
 .select-font-family {
@@ -383,7 +393,6 @@ button input {
 }
 
 .font-family select {
-    font-family: Fuzzy;
     width: -webkit-fill-available;
     border: none;
 }
@@ -399,19 +408,46 @@ button input {
 }
 
 .download,
-.save {
-    width: 6em;
+.save,
+.remove-borders,
+.share {
     padding: 5.6px 5.3px 5.1px 5.3px;
     border-radius: 6px;
     font-size: 2em;
+    width: 6em;
+}
+
+.remove-borders,
+.download {
+    width: 9em;
+}
+
+.remove-borders {
+    grid-area: remove-borders;
+    border-radius: 6px;
+    font-size: 2em;
+    margin-inline-start: 1em;
 }
 
 .download {
     grid-area: download;
+    margin-inline-end: 1em;
+}
+
+.share {
+    grid-area: share;
+    margin-inline-start: 1em;
 }
 
 .save {
     grid-area: save;
+    margin-inline-end: 1em;
+}
+
+.share,
+.save,
+.remove-borders,
+.font-family select {
     font-family: Fuzzy;
 }
 
@@ -503,7 +539,10 @@ button input {
     .gallery-container {
         grid-template-columns: repeat(5, 1fr);
     }
+    .select-font-family {
+        font-size: 2.35em;
+    }
     .str-line input {
-        width: 100%;
+        width: 11em;
     }
 }

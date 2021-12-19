@@ -1,8 +1,5 @@
 'use strict';
 
-function idMaker() {
-    return ++gNextId
-}
 
 function $(selectorOrEl) {
     var el = selectorOrEl;
@@ -20,4 +17,16 @@ function $(selectorOrEl) {
         }
     }
     return $el;
+}
+
+function toggleActive(element, arr) {
+    console.log(element, arr)
+    var lis = document.querySelectorAll(`${arr}`)
+    lis.forEach(li => {
+        li.classList.remove('active')
+    });
+    if (element) {
+        element.classList.add('active');
+        console.log(element)
+    }
 }

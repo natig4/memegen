@@ -34,7 +34,7 @@
                       <img src="./img/ICONS/search-icon.png"/>
                     </button>
                     </form>
-                    <section class="search-box flex align-center">
+                    <section class="key-words flex align-center">
 
                         <div class="search-indexes flex clean-list align-center">
                         </div>
@@ -48,9 +48,10 @@
 
             <div class="meme-container hide">
                 <div class="canvas-container">
-                    <canvas id="my-canvas"></canvas></div>
+                    <canvas id="my-canvas"></canvas>
+                </div>
                 <div class="meme-controller grid">
-                    <div class="str-line"> <input type="text" name="line" class="str-input" onclick="onCreateLine()" oninput="onSetLineTxt(this.value)" title="Change line text" placeholder="" autocomplete="off" autofocus /></div>
+                    <div class="str-line"> <input type="text" name="line" class="str-input" onclick="onCreateLine()" oninput="onSetLineTxt(this.value)" title="Change line text" placeholder="Enter text here" autocomplete="off" autofocus /></div>
                     <button class="switch-line" onclick="onChangeLine()"><img src="./img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
                     <button class="add-line" onclick="onAddLine()"><img src="./img/ICONS/add.png" alt=""></button>
                     <button class="remove-line" onclick="onRemoveLine()"><img src="./img/ICONS/trash.png" alt=""></button>
@@ -58,7 +59,6 @@
 
                         <div class="stickers-container flex align-center">
                         </div>
-
                     </div>
                     <button class="remove-sticker" onclick="onRemoveSticker()"><img src="./img/ICONS/trash.png" alt=""></button>
                     <button class="increase-font" onclick="onChangeFontSize(1)"><img src="./img/ICONS/increase font - icon.png" alt=""></button>
@@ -66,10 +66,8 @@
                     <button class="align-left" onclick="onChangeAlign('left')"><img src="./img/ICONS/align-to-left.png" alt=""></button>
                     <button class="align-center" onclick="onChangeAlign('center')"><img src="./img/ICONS/center-text-alignment.png" alt=""></button>
                     <button class="align-right" onclick="onChangeAlign('right')"><img src="./img/ICONS/align-to-right.png" alt=""></button>
-                    <button class="font-family"><select
-                    class="select-font-family"
-                    onchange="onChangeFontFamily(this.value)"
-                  >
+                    <button class="font-family">
+                    <select class="select-font-family" onchange="onChangeFontFamily(this.value)">
                     <option value="impact">Impact</option>
                     <option value="Arial">Arial</option>
                     <option value="times">Times new roman</option>
@@ -88,8 +86,10 @@
                     value="#ffffff"
                     onchange="onChangeColor('font', this.value)"
                   /></button>
-                    <a class="download" href="#" onclick="onDownloadMeme(this) " download="meme.jpg">Download</a>
+                    <a class="download" href="#" onclick="onDownloadMeme(this,event)" download="meme.jpg">Download</a>
                     <button class="save" onclick="onSaveMeme()">Save</button>
+                    <button class="share" onclick="onShareMeme()">Share</button>
+                    <button class="remove-borders" onclick="onRemoveBorders()">Remove Borders</button>
 
                 </div>
             </div>

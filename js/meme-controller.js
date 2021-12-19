@@ -4,6 +4,40 @@ var gCtx
 var gStartPos
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
+function renderCanvas(imgId) {
+    gElCanvas = document.querySelector('canvas')
+    gCtx = gElCanvas.getContext('2d')
+    var img = new Image;
+    if (typeof imgId === 'string') img.type = imgId
+    if (!imgId || typeof imgId === 'string') imgId = getImgId()
+    img.src = getUrlById(imgId)
+    img.onload = function() {
+        var scale = Math.max(gElCanvas.width / img.width, gElCanvas.height / img.height);
+        var x = (gElCanvas.width / 2) - (img.width / 2) * scale;
+        var y = (gElCanvas.height / 2) - (img.height / 2) * scale;
+        gCtx.drawImage(img, x, y, img.width * scale, img.height * scale)
+        drawText();
+        renderTextInput();
+        renderMemeStickers();
+        if (img.type === 'save') {
+            const meme = gElCanvas.toDataURL('image/jpeg');
+            saveMeme(meme);
+        } else if (img.type === 'no-borders') {
+            return
+        } else {
+            drawBorder();
+            renderMemeStickers('border');
+        }
+    }
+}
+
+
+function onRemoveBorders() {
+    renderCanvas('no-borders')
+}
+
+
+
 function addListeners() {
     addMouseListeners();
     addTouchListeners();
@@ -69,11 +103,12 @@ function renderStickers() {
 }
 
 function onImg(imgId) {
+    document.querySelector('.str-input').value = ''
     updateSelectedMeme(imgId)
-    onAddLine()
     renderStickers()
     renderCanvas(imgId)
-    toggleView('.meme-container', '.main-content', '.memes-gallery')
+    addListeners()
+    toggleView('.meme-container')
     resizeCanvas()
 }
 
@@ -99,7 +134,14 @@ function onChangeFontFamily(font) {
 
 function onChangeLine() {
     var line = changeLine();
+    if (!line) return;
     onSetLineTxt(line.txt);
+    renderCanvas();
+}
+
+function onChangeSticker() {
+    var sticker = changeSticker()
+    if (!sticker) return;
     renderCanvas();
 }
 
@@ -158,8 +200,12 @@ function drawText() {
     });
 }
 
-function drawBorder() {
-    const line = getCurrentLine();
+function drawBorder(sticker) {
+    if (sticker) {
+        var line = getCurrentSticker()
+    } else {
+        var line = getCurrentLine();
+    }
     if (!line) return;
     gCtx.beginPath();
     if (line.align === 'left') {
@@ -171,6 +217,9 @@ function drawBorder() {
     } else if (line.align === 'right') {
         if (window.screen.width > 1000) gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size * 1.6);
         else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size)
+    } else {
+        if (window.screen.width > 1000) gCtx.rect(line.pos.x, line.pos.y, 50, 50);
+        else gCtx.rect(line.pos.x - gCtx.measureText(line.txt).width, line.pos.y, gCtx.measureText(line.txt).width + 10, line.size)
     }
     gCtx.lineWidth = 2;
     gCtx.strokeStyle = line.strokeColor;
@@ -178,24 +227,6 @@ function drawBorder() {
     gCtx.closePath();
 }
 
-function renderCanvas(imgId) {
-    gElCanvas = document.querySelector('canvas')
-    gCtx = gElCanvas.getContext('2d')
-    if (!imgId) imgId = getImgId()
-    var img = new Image;
-    img.src = getUrlById(imgId)
-    img.onload = function() {
-        var scale = Math.max(gElCanvas.width / img.width, gElCanvas.height / img.height);
-        var x = (gElCanvas.width / 2) - (img.width / 2) * scale;
-        var y = (gElCanvas.height / 2) - (img.height / 2) * scale;
-        gCtx.drawImage(img, x, y, img.width * scale, img.height * scale)
-        addListeners()
-        drawText();
-        drawBorder();
-        renderTextInput();
-        renderMemeStickers();
-    }
-}
 
 function resizeCanvas() {
     var elContainer = document.querySelector('.canvas-container')
@@ -205,24 +236,29 @@ function resizeCanvas() {
 
 function onAddSticker(id, dec) {
     addSticker(id, dec);
+    if (getMemeStickers().length > 1) {
+        onChangeSticker()
+    }
     renderCanvas();
 }
 
-function renderMemeStickers() {
+function renderMemeStickers(border) {
     const stickers = getMemeStickers();
     stickers.forEach((sticker) => {
         const img = new Image();
         img.src = sticker.src;
         gCtx.drawImage(img, sticker.pos.x, sticker.pos.y, 50, 50);
+        if (border) drawBorder('sticker')
     });
 }
 
+
 function onDownloadMeme(elLink) {
+    renderCanvas('download')
     const memeContent = gElCanvas.toDataURL();
     elLink.href = memeContent;
 }
 
 function onSaveMeme() {
-    const meme = gElCanvas.toDataURL('image/jpeg');
-    saveMeme(meme);
+    renderCanvas('save')
 }

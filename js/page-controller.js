@@ -1,9 +1,6 @@
 'use strict';
 
 function onInit() {
-    window.addEventListener('submit', (ev) => {
-        ev.preventDefault()
-    })
     createKeyWords()
     renderImgs()
     renderKeywords()
@@ -26,46 +23,42 @@ function renderImgs() {
 
 }
 
-function toggleView(el1, el2, el3) {
-    const $el1 = $(`${el1}`)
-    const $el2 = $(`${el2}`)
-    const $el3 = $(`${el3}`)
-    $el1.removeClass('hide')
-    $el1.addClass('flex')
-    $el2.removeClass('flex')
-    $el2.addClass('hide')
-    $el3.removeClass('flex')
-    $el3.addClass('hide')
+function toggleView(flexView) {
+    const viewNames = ['.main-content', '.meme-container', '.memes-gallery']
+    viewNames.forEach(element => {
+        if (element === flexView) {
+            $(element).removeClass('hide')
+            $(element).addClass('flex')
+        } else {
+            $(element).removeClass('flex')
+            $(element).addClass('hide')
+        }
+    });
 }
 
+
+
 function onNav(elLi) {
-    toggleNav(elLi)
+    toggleActive(elLi, 'ul li')
     switch (elLi.innerHTML) {
         case 'Gallery':
-            toggleView('.main-content', '.meme-container', '.memes-gallery')
+            toggleView('.main-content')
             break;
         case 'Memes':
-            toggleView('.memes-gallery', '.meme-container', '.main-content')
+            toggleView('.memes-gallery')
             renderMyMemes()
             break;
     }
 }
 
-function toggleNav(elLi) {
-    var lis = document.querySelectorAll('ul li')
-    lis.forEach(li => {
-        li.classList.remove('active')
-    });
-    if (elLi) elLi.classList.add('active');
-}
 
 function renderMyMemes() {
     const memes = getSavedMemes();
     var strHtmls;
-    const memeSize = Object.keys(memes).length;
+    const memeSize = memes.length;
     if (memeSize) {
         strHtmls = memes.map((meme) => {
-            return `<a href="#" onclick="onDownloadMeme(this) " download="meme.jpg"><img src="${meme}"/></a>`;
+            return `<a href="${meme}"  " download="meme.jpg"><img src="${meme}"/></a>`;
         });
     } else {
         strHtmls = `<h1>No saved Memes Go ahead and create one 🙂</h1>`;
@@ -84,8 +77,8 @@ function onSearch(ev) {
     renderImgs();
 }
 
-function onKeyFillter(word) {
-    fillterBySearch(word);
+function onKeyFillter(li, txt) {
+    fillterBySearch(txt);
     renderKeywords();
     renderImgs();
 }
@@ -97,7 +90,7 @@ function renderKeywords(txt = 'More...') {
     for (const word in keywords) {
         strHtmls += `
       <li class="keyword"><a href="#" style="font-size: ${keywords[word]/15}em;"
-      onclick="onKeyFillter('${word}')">${word}</a></li>`;
+      onclick="onKeyFillter(this,'${word}')">${word}</a></li>`;
     }
     document.querySelector('.search-indexes').innerHTML = strHtmls + `<div class="btn-more" onclick="onToggleMore(this) ">${txt}</div>`;
 }
