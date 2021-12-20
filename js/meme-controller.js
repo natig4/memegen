@@ -26,7 +26,9 @@ function renderCanvas(imgId, bordersType) {
         }
         drawBorder();
     }
-    document.querySelector('.str-input').focus()
+    if (window.screen.width > 1000) {
+        document.querySelector('.str-input').focus()
+    }
 }
 
 function onRemoveBorders() {

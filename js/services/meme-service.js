@@ -1,5 +1,6 @@
 'use strict';
 var gNextIdStickers = 0;
+
 const gStickers = [
     { id: 1, src: './img/stickers/flirty-smiley.png' },
     { id: 2, src: './img/stickers/nerd-emoji.png' },
