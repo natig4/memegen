@@ -131,6 +131,7 @@ function onImg(imgId) {
     addListeners()
     toggleView('.meme-container')
     resizeCanvas()
+    onCreateLine()
 }
 
 function onSetLineTxt(txt) {
