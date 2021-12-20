@@ -36,6 +36,16 @@ function toggleView(flexView) {
     });
 }
 
+function toggleClassActive(l1) {
+    const keyWords = document.querySelectorAll('.keyword')
+    keyWords.forEach(element => {
+        if (element === l1) {
+            $(element).addClass('hide')
+        } else {
+            $(element).removeClass('hide')
+        }
+    });
+}
 
 
 
@@ -70,8 +80,8 @@ function renderMyMemes() {
 }
 
 function onSearch(ev) {
-    ev.preventDefault();
     const elSearch = document.querySelector('input[name="search"]');
+    ev.preventDefault();
     fillterBySearch(elSearch.value.toLowerCase());
     elSearch.value = '';
     renderKeywords();
@@ -82,6 +92,7 @@ function onKeyFillter(li, txt) {
     fillterBySearch(txt);
     renderKeywords();
     renderImgs();
+    // toggleClassActive(li)
 }
 
 function renderKeywords(txt = 'More...') {

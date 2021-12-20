@@ -154,7 +154,7 @@
         justify-content: center;
     }
     
-    form input {
+    .search-panel input {
         font-size: 1em;
         font-family: Fuzzy;
         border-radius: 6px;
@@ -171,10 +171,14 @@
     
     .search-btn {
         align-self: center;
-        width: 4em;
+        width: 5em;
         margin-inline-start: 1em;
         border: none;
         background-color: white;
+    }
+    
+    .search-btn img {
+        width: 4em;
     }
     
     .search-indexes {
@@ -185,6 +189,10 @@
     .search-indexes li {
         padding: 0.5em;
         text-transform: capitalize;
+    }
+    
+    .search-indexes li a.active {
+        color: yellowgreen;
     }
     
     .gallery-container {

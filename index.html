@@ -27,10 +27,9 @@
         <main class="main-layout">
             <div class="main-content flex align-center">
                 <div class="search-panel flex">
-                    <form class="search-form flex" onchange="onSearch(event)">
-                        <input list="search-words " class="search" name="search" placeholder="Enter search keyword" autocomplete="off " />
-                        <datalist id="search-words"></datalist>
-                        <button class="search-btn">
+                    <form class="search-form flex" onchange="">
+                        <input list="search-words" class="search" name="search" placeholder="Enter search keyword" />
+                        <button class="search-btn" onclick="onSearch(event)">
                       <img src="./img/ICONS/search-icon.png"/>
                     </button>
                     </form>
